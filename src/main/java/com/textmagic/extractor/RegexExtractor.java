@@ -97,6 +97,7 @@ public class RegexExtractor extends AbstractExtractor {
             groupIndex = 0;
             hasNext = m.find();
             if (!hasNext) {
+                next = null;
                 return false;
             }
             next = m.group(groups[groupIndex++]);

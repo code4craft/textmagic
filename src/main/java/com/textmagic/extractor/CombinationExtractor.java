@@ -70,7 +70,8 @@ public class CombinationExtractor extends AbstractExtractor {
      */
     @Override
     public String nextThisText() {
-        return iterator.next();
+        String next = iterator.next();
+        return next;
     }
 
     /**
