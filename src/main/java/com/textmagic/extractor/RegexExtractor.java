@@ -17,6 +17,10 @@ public class RegexExtractor extends AbstractExtractor {
         return "RegexTextExtractor [pattern=" + pattern + "]";
     }
 
+    private int[] groups;
+
+    private int groupIndex;
+
     private String pattern;
 
     private Pattern _pattern;
@@ -41,6 +45,12 @@ public class RegexExtractor extends AbstractExtractor {
 
     public RegexExtractor(String pattern) {
         this.pattern = pattern;
+        this.groups = new int[] { 0 };
+    }
+
+    public RegexExtractor(String pattern, int[] groups) {
+        this.pattern = pattern;
+        this.groups = groups;
     }
 
     /**
@@ -81,8 +91,16 @@ public class RegexExtractor extends AbstractExtractor {
             next = null;
             return false;
         }
-        next = m.group(1);
-        hasNext = m.find();
+        if (groupIndex < groups.length) {
+            next = m.group(groups[groupIndex++]);
+        } else {
+            groupIndex = 0;
+            hasNext = m.find();
+            if (!hasNext) {
+                return false;
+            }
+            next = m.group(groups[groupIndex++]);
+        }
         return true;
     }
 
