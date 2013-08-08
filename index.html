@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Textmagic : Textmagic is a text extractor with a powerful expression language to config." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Textmagic</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/code4craft/textmagic">View on GitHub</a>
+
+          <h1 id="project_title">Textmagic</h1>
+          <h2 id="project_tagline">Textmagic is a text extractor with a powerful expression language to config.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/code4craft/textmagic/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/code4craft/textmagic/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>
+<a name="webmagic%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C" class="anchor" href="#webmagic%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C"><span class="octicon octicon-link"></span></a>webmagic使用手册</h2>
+
+<blockquote>
+<p>webmagic是一个开源的Java垂直爬虫框架，目标是简化爬虫的开发流程，让开发者专注于逻辑功能的开发。webmagic的核心非常简单，但是涵盖爬虫的全部功能，也是很好的学习爬虫的材料。web爬虫是一种技术，webmagic致力于将这种技术的实现成本降低，但是出于对资源提供者的尊重，webmagic不会做反封锁的事情，包括：验证码破解、代理切换、自动登录、抓取静态资源等。</p>
+</blockquote>
+
+<h2>
+<a name="%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B" class="anchor" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="octicon octicon-link"></span></a>快速开始</h2>
+
+<h3>
+<a name="%E4%BD%BF%E7%94%A8maven" class="anchor" href="#%E4%BD%BF%E7%94%A8maven"><span class="octicon octicon-link"></span></a>使用maven</h3>
+
+<p>webmagic使用maven管理依赖，你可以直接下载webmagic源码进行编译：</p>
+
+<pre><code>git clone https://github.com/code4craft/webmagic.git
+mvn clean install
+</code></pre>
+
+<p>安装后，在项目中添加对应的依赖即可使用webmagic：</p>
+
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;us.codecraft&lt;/groupId&gt;
+        &lt;artifactId&gt;webmagic-core&lt;/artifactId&gt;
+        &lt;version&gt;0.2.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;us.codecraft&lt;/groupId&gt;
+        &lt;artifactId&gt;webmagic-extension&lt;/artifactId&gt;
+        &lt;version&gt;0.2.0&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre>
+
+<h4>
+<a name="%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84" class="anchor" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="octicon octicon-link"></span></a>项目结构</h4>
+
+<p>webmagic主要包括两个包：</p>
+
+<ul>
+<li>
+<p><strong>webmagic-core</strong></p>
+
+<p>webmagic核心部分，只包含爬虫基本模块和基本抽取器。webmagic-core的目标是成为网页爬虫的一个教科书般的实现。</p>
+</li>
+<li>
+<p><strong>webmagic-extension</strong></p>
+
+<p>webmagic的扩展模块，提供一些更方便的编写爬虫的工具。包括注解格式定义爬虫、JSON、分布式等支持。</p>
+</li>
+</ul><p>webmagic还包含两个可用的扩展包，因为这两个包都依赖了比较重量级的工具，所以从主要包种抽离出来：</p>
+
+<ul>
+<li>
+<p>webmagic-saxon</p>
+
+<p>webmagic与Saxon结合的模块。Saxon是一个XPath、XSLT的解析工具，webmagic依赖Saxon来进行XPath2.0语法解析支持。</p>
+</li>
+<li>
+<p>webmagic-selenium</p>
+
+<p>webmagic与Selenium结合的模块。Selenium是一个模拟浏览器进行页面渲染的工具，webmagic依赖Selenium进行动态页面的抓取。</p>
+</li>
+</ul><p>在项目中，你可以根据需要依赖不同的包。</p>
+
+<h3>
+<a name="%E4%B8%8D%E4%BD%BF%E7%94%A8maven" class="anchor" href="#%E4%B8%8D%E4%BD%BF%E7%94%A8maven"><span class="octicon octicon-link"></span></a>不使用maven</h3>
+
+<h2>
+<a name="%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90" class="anchor" href="#%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90"><span class="octicon octicon-link"></span></a>架构解析</h2>
+
+<h2>
+<a name="%E7%A4%BA%E4%BE%8B" class="anchor" href="#%E7%A4%BA%E4%BE%8B"><span class="octicon octicon-link"></span></a>示例</h2>
+
+<h2>
+<a name="%E5%88%86%E5%B8%83%E5%BC%8F" class="anchor" href="#%E5%88%86%E5%B8%83%E5%BC%8F"><span class="octicon octicon-link"></span></a>分布式</h2>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Textmagic maintained by <a href="https://github.com/code4craft">code4craft</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
